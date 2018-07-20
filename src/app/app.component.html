@@ -1,12 +1,12 @@
 <clr-main-container>
-  <header class="header header-3">
+  <clr-header class="header header-3">
     <div class="branding">
       <a>
         <clr-icon shape="group"></clr-icon>
         <span class="title">Community</span>
       </a>
     </div>
-    <div class="header-nav">
+    <div class="header-nav" [clr-nav-level]="1">
       <a class="nav-link" routerLink="/forums"><span class="nav-text">Forums</span></a>
       <a class="nav-link" routerLink="/blogs"><span class="nav-text">Blogs</span></a>
     </div>
@@ -18,7 +18,7 @@
         <clr-icon shape="logout"></clr-icon>
       </a>
     </div>
-  </header>
+  </clr-header>
   <div class="content-container">
     <div class="content-area">
       <router-outlet></router-outlet>
