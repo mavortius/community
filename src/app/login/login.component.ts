@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Query } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { UserService } from '../services/user.service';
@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams
-      .subscribe(params => {
+      .subscribe((params: Query) => {
         this.returnUrl = params[ 'return' ] || '/forums';
 
         if (!this.userService.isGuest()) {

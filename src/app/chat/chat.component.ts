@@ -2,6 +2,7 @@ import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@ang
 
 import { ChatBotService } from '../services/chat-bot.service';
 import { UserService } from '../services/user.service';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-chat',
@@ -16,11 +17,18 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
   @ViewChild('scrollBox') private scrollBox: ElementRef;
 
-  constructor(private chatBotService: ChatBotService,
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private chatBotService: ChatBotService,
               private userService: UserService) {
   }
 
   ngOnInit() {
+    this.route.params.subscribe((params: Params) => {
+      this.messages = [];
+      this.user = this.userService.getUser();
+      this.guest = params[ 'username' ];
+    });
   }
 
   ngAfterViewChecked(): void {
@@ -28,6 +36,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   }
 
   close() {
+    this.router.navigate([ { outlets: { chat: null } } ]);
   }
 
   onKeyUp(event) {

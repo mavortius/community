@@ -11,13 +11,14 @@ import { UserService } from './user.service';
 export class AuthGuardService implements CanActivate {
 
   constructor(private userService: UserService,
-              private router: Router) { }
+              private router: Router) {
+  }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    if(!this.userService.isGuest()) {
+    if (!this.userService.isGuest()) {
       return true;
     } else {
-      this.router.navigate(['/login'], {
+      this.router.navigate([ '/login' ], {
         queryParams: {
           return: state.url
         }
